@@ -1,0 +1,8 @@
+# Conway's Game of Life (RUST)
+Read a blog post where someone said that whenever they pick up a new language the first thing they try and do is implement [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
+Ive been wanting to pick up Rust for a while now so this seemed like a good start. Have some experience with C and (to a lesser extent C++) so it felt familiar. I remember a while back that someone described it to me as "C but with a bunch of near zero cost abstractions on top of it", and I can see that with the minimal amount of things if encountered so far.
+
+## Implementation
+Could be that I got ahead of myself when deciding how to represent my board and calculation new generations, but to be a bit more thorough decided to think about memory and time complexity. I wanted to encorporate the idea of an "infinite" board from the start which led me to abstractly the notion of a sparse matrix. After sketching out a high level model I figured the biggest performance hits could potentially be in finding a given cells neighbors, and handling dead cells that could come back to life. 
+
+Decided to use HashSets and HashMaps. Only keep track of alive cells with a HashSet, so we dont need to store every cell (which if we want an infinite board, we cant), and quick look up of a cells neighbors. I then use the HashMap to keep track of dead cells of interest, adding entries that map a dead cells coordinates that is neighbors with an alive cell to a counter of alive neighbors. That way at any given point we are only storing the things that are relevant when going from one generation to the next (alive cells, and cells that might come back to life). Plus using hash data structures allows for quicker ~constant time look ups.
