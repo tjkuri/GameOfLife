@@ -103,9 +103,9 @@ fn main() {
         println!();
     
         // Introduce a 2-second delay
-        sleep(Duration::from_secs(2));
+        sleep(Duration::from_secs(1));
     
-        // Calculate the next generation (replace with your function call)
+        // Calculate the next generation 
         let next_board = get_next_generation(&board);
     
         // Update the board for the next iteration
